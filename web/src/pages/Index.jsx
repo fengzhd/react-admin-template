@@ -1,71 +1,84 @@
-import React, { Component } from 'react';
-import { Menu } from 'antd';
-import {
-  AppstoreOutlined,
-  // MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  PieChartOutlined,
-  DesktopOutlined,
-  ContainerOutlined,
-  MailOutlined,
-} from '@ant-design/icons';
-
-const { SubMenu } = Menu;
+import React, { Component } from 'react'
+import { Row, Col } from 'antd';
+import { TeamOutlined, MailOutlined, LikeOutlined, RedEnvelopeOutlined } from '@ant-design/icons';
+import Card from 'components/index/Card'
+import LineChart from 'components/index/LineChart'
+import TodoList from 'components/index/TodoList'
 
 export class Index extends Component {
-  state = {
-    collapsed: false,
+  constructor() {
+    super()
+    this.state = {
+      cardsList: [
+        {
+          icon: <TeamOutlined />,
+          color: '#40c9c6',
+          title: '访客量',
+          describe: 2000,
+          data: [2, 3, 5, 6, 3, 8, 9]
+        },
+        {
+          icon: <MailOutlined />,
+          color: '#36a3f7',
+          title: '消息量',
+          describe: 2000,
+          data: [4, 2, 7, 8, 2, 5, 7]
+        },
+        {
+          icon: <LikeOutlined />,
+          color: '#f3ed05',
+          title: '获赞数',
+          describe: 2000,
+          data: [3, 5, 7, 8, 2, 6, 7]
+        },
+        {
+          icon: <RedEnvelopeOutlined />,
+          color: '#f4516c',
+          title: '红包数',
+          describe: 2000,
+          data: [2, 3, 4, 2, 8, 6, 4]
+        }
+      ],
+      selectedCard: 0
+    }
   }
-
-  toggleCollapsed = () => {
-    var a = 1;
-    console.log(1);
+  handleCardClick(item, index) {
     this.setState({
-      collapsed: !this.state.collapsed,
-    });
-  };
-
+      selectedCard: index
+    })
+  }
   render() {
     return (
-      <div className="h-full" style={{ width: 256 }}>
-        {/* <Button type="primary" onClick={this.toggleCollapsed} style={{ marginBottom: 16 }}>
-          {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-        </Button> */}
-        <Menu
-          className="h-full"
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          mode="inline"
-          theme="dark"
-          inlineCollapsed={this.state.collapsed}
-        >
-          <Menu.Item key="1" icon={<PieChartOutlined />}>
-            Option 1
-          </Menu.Item>
-          <Menu.Item key="2" icon={<DesktopOutlined />}>
-            Option 2
-          </Menu.Item>
-          <Menu.Item key="3" icon={<ContainerOutlined />}>
-            Option 3
-          </Menu.Item>
-          <SubMenu key="sub1" icon={<MailOutlined />} title="Navigation One">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu>
-          <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Navigation Two">
-            <Menu.Item key="9">Option 9</Menu.Item>
-            <Menu.Item key="10">Option 10</Menu.Item>
-            <SubMenu key="sub3" title="Submenu">
-              <Menu.Item key="11">Option 11</Menu.Item>
-              <Menu.Item key="12">Option 12</Menu.Item>
-            </SubMenu>
-          </SubMenu>
-        </Menu>
+      <div>
+        <Row gutter={16}>
+          {
+            this.state.cardsList.map((item, index) => {
+              return (
+                <Col span={6} key={index} onClick={this.handleCardClick.bind(this, item, index)}>
+                  <Card {...item} />
+                </Col>
+              )
+            })
+          }
+        </Row>
+        <div className="p-v-20">
+          <LineChart data={this.state.cardsList[this.state.selectedCard]} />
+        </div>
+        <Row gutter={16}>
+          <Col className="gutter-row" span={8}>
+          </Col>
+          <Col className="gutter-row" span={8}>
+            <div>col-6</div>
+          </Col>
+          <Col className="gutter-row" span={8}>
+            <TodoList />
+
+          </Col>
+        </Row>
+        <div className="h-500"></div>
       </div>
-    );
+    )
   }
 }
 
-export default Index;
+export default Index
