@@ -1,0 +1,20 @@
+.player {
+  .axle-rotate-start {
+    transform: rotate(36deg);
+    transform-origin: 5px 5px;
+    transition: all 0.3s;
+  }
+  .axle-rotate-end {
+    transform: rotate(0deg);
+    transform-origin: 5px 5px;
+    transition: all 0.3s;
+  }
+  .volumeHover:hover {
+    .volumeSlider {
+      display: block;
+    }
+  }
+  .footer-shadow {
+    box-shadow: 0 -3px 5px #eee;
+  }
+}

@@ -17,37 +17,43 @@ export class SideMenu extends Component {
           icon: <HomeFilled />
         },
         {
-          name: '权限页',
+          name: 'Redux',
           key: 1,
+          path: '/redux',
+          icon: <HomeFilled />
+        },
+        {
+          name: '权限页',
+          key: 2,
           path: '/permission',
           icon: <HomeFilled />
         },
         {
           name: '图标',
-          key: 2,
+          key: 3,
           path: '/icons',
           icon: <HomeFilled />
         },
         {
           name: '图表',
-          key: 3,
+          key: 4,
           icon: <HomeFilled />,
           children: [
             {
               name: '折线图',
-              key: 4,
-              path: '/icons',
-              icon: <HomeFilled />
-            },
-            {
-              name: '饼图',
               key: 5,
               path: '/icons',
               icon: <HomeFilled />
             },
             {
-              name: '地图',
+              name: '饼图',
               key: 6,
+              path: '/icons',
+              icon: <HomeFilled />
+            },
+            {
+              name: '地图',
+              key: 7,
               path: '/icons',
               icon: <HomeFilled />
             }

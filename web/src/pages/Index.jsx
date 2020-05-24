@@ -4,6 +4,7 @@ import { TeamOutlined, MailOutlined, LikeOutlined, RedEnvelopeOutlined } from '@
 import Card from 'components/index/Card'
 import LineChart from 'components/index/LineChart'
 import TodoList from 'components/index/TodoList'
+import Player from 'components/index/Player'
 
 export class Index extends Component {
   constructor() {
@@ -65,14 +66,11 @@ export class Index extends Component {
           <LineChart data={this.state.cardsList[this.state.selectedCard]} />
         </div>
         <Row gutter={16}>
-          <Col className="gutter-row" span={8}>
-          </Col>
-          <Col className="gutter-row" span={8}>
-            <div>col-6</div>
+          <Col className="gutter-row" span={16}>
+            <Player />
           </Col>
           <Col className="gutter-row" span={8}>
             <TodoList />
-
           </Col>
         </Row>
         <div className="h-500"></div>

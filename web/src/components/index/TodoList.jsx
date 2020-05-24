@@ -124,38 +124,44 @@ export class TodoList extends Component {
   render() {
     return (
       <div className="shadow b-radius-5 o-hidden">
-        <Input className="b-none b-b" size="large" placeholder="TODOLIST" value={this.state.inputVal} onChange={this.inputChange} onPressEnter={this.inputEnter} />
         <List
           className="bg-white p-h-10"
           itemLayout="horizontal"
           size="large"
-        >
-          {
-            this.state.data.map((item, index) => {
-              if (item.isShow) {
-                return (<List.Item className="b-b" key={index}>
-                  <Radio checked={item.checked} onClick={this.radioChange.bind(this, index)}>
-                    <span style={{ textDecoration: item.checked ? 'line-through' : 'none', color: item.checked ? '#eee' : '' }}>
-                      {item.title}
-                    </span>
-                  </Radio>
-                </List.Item>)
-              } else {
-                return null
+          header={
+            <Input className="b-none" size="default" placeholder="TODOLIST" value={this.state.inputVal} onChange={this.inputChange} onPressEnter={this.inputEnter} />
+          }
+          footer={
+            <div className="">
+              <span className="p-h-10" onClick={this.typeChange}>共有3项未完成</span>
+              {
+                this.state.listTypes.map(item => {
+                  return (
+                    <span className={`p-h-10 cursor-pointer ${this.state.activeListType === item.id ? 'text-blue' : ''}`} key={item.id} onClick={this.typeChange.bind(this, item.id)}>{item.name}</span>
+                  )
+                })
               }
-            })
+            </div>
           }
+        >
+          <div className='h-400 o-y-auto'>
+            {
+              this.state.data.map((item, index) => {
+                if (item.isShow) {
+                  return (<List.Item className="b-b" key={index}>
+                    <Radio checked={item.checked} onClick={this.radioChange.bind(this, index)}>
+                      <span style={{ textDecoration: item.checked ? 'line-through' : 'none', color: item.checked ? '#eee' : '' }}>
+                        {item.title}
+                      </span>
+                    </Radio>
+                  </List.Item>)
+                } else {
+                  return null
+                }
+              })
+            }
+          </div>
         </List>
-        <div className="p-v-10">
-          <span className="p-h-10" onClick={this.typeChange}>共有3项未完成</span>
-          {
-            this.state.listTypes.map(item => {
-              return (
-                <span className={`p-h-10 cursor-pointer ${this.state.activeListType === item.id ? 'text-blue' : ''}`} key={item.id} onClick={this.typeChange.bind(this, item.id)}>{item.name}</span>
-              )
-            })
-          }
-        </div>
       </div>
     )
   }
