@@ -8,7 +8,6 @@ import ReactJson from 'react-json-view'
 
 export class Redux extends Component {
   render() {
-  console.log(this.props)
     return (
       <Row>
         <Col span={12}>

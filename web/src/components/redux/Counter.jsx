@@ -5,7 +5,6 @@ import { increase, decrease } from 'actions/counter'
 
 export class Counter extends Component {
   render() {
-    console.log(this.props.state)
     return (
       <div>
         <Button type="primary" onClick={this.props.decrease.bind(this, 2)}>-</Button>
