@@ -6,8 +6,9 @@ import { connect } from 'react-redux'
 import ReactJson from 'react-json-view'
 
 
-export class ReduxDemo extends Component {
+export class Redux extends Component {
   render() {
+  console.log(this.props)
     return (
       <Row>
         <Col span={12}>
@@ -39,4 +40,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ReduxDemo)
+export default connect(mapStateToProps)(Redux)

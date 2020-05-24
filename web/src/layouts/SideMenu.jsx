@@ -3,65 +3,69 @@ import { Menu } from 'antd';
 import { HomeFilled } from '@ant-design/icons';
 import { withRouter } from 'react-router-dom';
 const { SubMenu } = Menu;
-
+export const menuList = [
+  {
+    name: '首页',
+    key: 0,
+    path: '/index',
+    component: 'Index',
+    icon: <HomeFilled />
+  },
+  {
+    name: 'Redux',
+    key: 1,
+    path: '/redux',
+    component: 'Redux',
+    icon: <HomeFilled />
+  },
+  {
+    name: 'Hook',
+    key: 2,
+    path: '/hook',
+    component: 'Hook',
+    icon: <HomeFilled />
+  },
+  {
+    name: '权限页',
+    key: 3,
+    path: '/permission',
+    component: 'Permission',
+    icon: <HomeFilled />
+  },
+  // {
+  //   name: '图标',
+  //   key: 4,
+  //   path: '/icons',
+  //   icon: <HomeFilled />
+  // },
+  // {
+  //   name: '图表',
+  //   key: 5,
+  //   icon: <HomeFilled />,
+  //   children: [
+  //     {
+  //       name: '折线图',
+  //       key: 6,
+  //       path: '/icons',
+  //       icon: <HomeFilled />
+  //     },
+  //     {
+  //       name: '饼图',
+  //       key: 7,
+  //       path: '/icons',
+  //       icon: <HomeFilled />
+  //     },
+  //     {
+  //       name: '地图',
+  //       key: 8,
+  //       path: '/icons',
+  //       icon: <HomeFilled />
+  //     }
+  //   ]
+  // }
+]
 
 export class SideMenu extends Component {
-  constructor() {
-    super()
-    this.state = {
-      menuList: [
-        {
-          name: '首页',
-          key: 0,
-          path: '/index',
-          icon: <HomeFilled />
-        },
-        {
-          name: 'Redux',
-          key: 1,
-          path: '/redux',
-          icon: <HomeFilled />
-        },
-        {
-          name: '权限页',
-          key: 2,
-          path: '/permission',
-          icon: <HomeFilled />
-        },
-        {
-          name: '图标',
-          key: 3,
-          path: '/icons',
-          icon: <HomeFilled />
-        },
-        {
-          name: '图表',
-          key: 4,
-          icon: <HomeFilled />,
-          children: [
-            {
-              name: '折线图',
-              key: 5,
-              path: '/icons',
-              icon: <HomeFilled />
-            },
-            {
-              name: '饼图',
-              key: 6,
-              path: '/icons',
-              icon: <HomeFilled />
-            },
-            {
-              name: '地图',
-              key: 7,
-              path: '/icons',
-              icon: <HomeFilled />
-            }
-          ]
-        }
-      ]
-    }
-  }
   menuClick = ({ item, key, keyPath, domEvent }) => {
     let path = item.props.path
     this.props.history.push(path)
@@ -70,7 +74,7 @@ export class SideMenu extends Component {
     return (
       <Menu theme="dark" mode="inline" defaultSelectedKeys={['0']} onClick={this.menuClick}>
         {
-          this.state.menuList.map(item => {
+          menuList.map(item => {
             return (
               item.children ?
                 <SubMenu key={item.key} icon={item.icon} title={item.name}>
