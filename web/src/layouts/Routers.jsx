@@ -1,18 +1,28 @@
-import React, { Component } from 'react'
-import { Route } from 'react-router-dom';
-// import Index from 'pages/Index'
-// import Permission from 'pages/Permission'
-// import Redux from 'pages/Redux'
-// import Hook from 'pages/Hook'
-import { menuList } from './SideMenu'
+import React, { Component, Suspense, lazy } from 'react'
+import { Route, Redirect } from 'react-router-dom';
+
+import menuList from './router'
 export class Routers extends Component {
   render() {
+    let isLogin = true;
     return (
       <div>
         {
           menuList.map(item => {
             return (
-              <Route key={item.key} path={item.path} component={require('pages/' + item.component).default} />
+              // <Route key={item.key} path={item.path} component={require('pages/' + item.component).default} />
+              <Suspense fallback={<div>Loading...</div>}>
+                {
+                  isLogin ? 
+                  (
+                    <Route key={item.key} path={item.path} component={item.component} />
+                  )
+                  : 
+                  (
+                    <Redirect to={{ pathname: "/login"}}/>
+                  )
+                }
+              </Suspense>
             )
           })
         }
