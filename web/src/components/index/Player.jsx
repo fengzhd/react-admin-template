@@ -91,7 +91,6 @@ export class Player extends Component {
       this.audioRef.current.addEventListener("timeupdate", () => {
         let nowTime = parseInt(this.audioRef.current.currentTime + 0.2)
         let lrcIndex = this.state.lrc.findIndex(item => item.time === nowTime)
-        console.log('第几行', lrcIndex)
         this.setState({
           nowAudio: {
             ...this.state.nowAudio,
@@ -123,7 +122,6 @@ export class Player extends Component {
     this.setState({
       playType: playType
     })
-    console.log(playType)
   }
   // 改变音量
   volumeChange = (val) => {
@@ -145,6 +143,8 @@ export class Player extends Component {
       case 1:
         index = getNotItemRandom(0, this.state.audioList.length - 1, index)
         break;
+      default:
+        break
     }
     this.switchAudio(index)
   }
@@ -162,6 +162,8 @@ export class Player extends Component {
         break;
       case 1:
         index = getNotItemRandom(0, this.state.audioList.length - 1, index)
+        break;
+      default:
         break;
     }
     this.switchAudio(index)
@@ -200,16 +202,13 @@ export class Player extends Component {
     lrcArr.forEach((item, i) => {
       let time = item.match(exp)
       if (time) {
-        console.log(time[1])
         let timeArr = time[1].split(':')
-        console.log(timeArr)
         arr.push({
           time: parseInt(timeArr[0] * 60 + (+timeArr[1])),
           text: item.replace(exp, '')
         })
       }
     })
-    console.log(arr)
     this.setState({
       lrc: arr
     })
@@ -227,12 +226,13 @@ export class Player extends Component {
         <Layout onClick={() => { this.setState({ openList: false }) }}>
           <Sider className="bg-light-grey" theme="light" width={320}>
             <div className="relative w-200 m-auto m-t-80">
-              <img src={require("assets/images/player2.png")} className={`w-100 absolute left-100 z-index-2 ${this.state.isPlay ? 'axle-rotate-start' : 'axle-rotate-end'}`} />
+              <img src={require("assets/images/player2.png")} alt="" className={`w-100 absolute left-100 z-index-2 ${this.state.isPlay ? 'axle-rotate-start' : 'axle-rotate-end'}`} />
               <div className="absolute left-0 top-40">
-                <img src={require("assets/images/player1.png")} className="w-200 absolute top-0 left-0 z-index-1" />
+                <img src={require("assets/images/player1.png")} alt="" className="w-200 absolute top-0 left-0 z-index-1" />
                 <img src={this.state.nowAudio.picture}
-                  className="w-150 h-150 absolute top-25 left-25 b-round"
-                  style={{ transform: `rotate(${this.state.deg}deg)` }} />
+                     alt=""
+                     className="w-150 h-150 absolute top-25 left-25 b-round"
+                     style={{ transform: `rotate(${this.state.deg}deg)` }} />
               </div>
             </div>
           </Sider>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Radio, Input, Button } from 'antd';
+import { List, Radio, Input } from 'antd';
 
 export class TodoList extends Component {
   constructor() {
@@ -115,6 +115,7 @@ export class TodoList extends Component {
           return item
         })
         break
+      default: break;
     }
     this.setState({
       activeListType: id,

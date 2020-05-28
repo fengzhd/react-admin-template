@@ -7,14 +7,12 @@ const newsList = (state = {isLoading: false, list: []}, action) => {
         isLoading: true,
         list: []
       }
-      break;
     case SET_NEWS_LIST:
       return {
         ...state,
         isLoading: false,
         list: action.list
       }
-      break;
     default: 
       return state
   }

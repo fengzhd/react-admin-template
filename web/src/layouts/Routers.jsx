@@ -1,26 +1,29 @@
 import React, { Component } from 'react'
-import { Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import menuList from './router'
 export class Routers extends Component {
   render() {
-    let isLogin = true;
+    let isLogin = sessionStorage.getItem('userInfo');
     return (
       <div>
-        {
-          menuList.map(item => {
-            return (
-              isLogin ?
-                (
-                  <Route key={item.key} path={item.path} component={item.component} />
-                )
-                :
-                (
-                  <Redirect key={-1} to={{ pathname: "/login" }} />
-                )
-            )
-          })
-        }
+        <Switch>
+          {
+            menuList.map(item => {
+              return (
+                isLogin ?
+                  (
+                    <Route key={item.key} path={item.path} component={item.component} />
+                  )
+                  :
+                  (
+                    <Redirect key={-1} to={{ pathname: "/login" }} />
+                  )
+              )
+            })
+          }
+          <Redirect key={-2} to={{ pathname: "/404" }} />
+        </Switch>
       </div>
     )
   }
